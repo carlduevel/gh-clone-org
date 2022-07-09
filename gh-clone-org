@@ -150,10 +150,9 @@ do
   d=${repo#$GITHUB_ORG/}
   if [ -d "$d" ]
   then
-    echo "'$d' already exists, attempting to checkout the default branch and pull"
+    echo "'$d' already exists, attempting to sync"
     cd "$d"
-    default_branch="$(gh api "repos/$repo" -q '.default_branch')"
-    git checkout "$default_branch" && git pull
+    gh repo sync
     cd ..
   else
     gh repo clone "$repo"
